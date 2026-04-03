@@ -1,0 +1,96 @@
+---
+import { projects } from '../data/projects';
+---
+<section id="projects">
+  <div class="inner">
+    <div class="section-label">§ Projects</div>
+    <div class="project-list">
+      {projects.map((project, i) => (
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="project-row"
+        >
+          <div class={`accent-bar ${i % 2 === 0 ? 'yellow' : 'black'}`}></div>
+          <div class="project-info">
+            <div class="project-name">{project.name}</div>
+            <div class="project-desc">{project.description}</div>
+          </div>
+          <div class="project-link">↗</div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+#projects {
+  background: var(--bg);
+}
+
+.inner {
+  padding: 40px 24px;
+}
+
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 720px;
+}
+
+.project-row {
+  display: flex;
+  align-items: stretch;
+  border: var(--border-thin);
+  color: inherit;
+}
+
+.project-row:hover {
+  background: var(--accent);
+}
+
+.accent-bar {
+  width: 8px;
+  flex-shrink: 0;
+}
+
+.accent-bar.yellow { background: var(--accent); }
+.accent-bar.black  { background: var(--fg); }
+
+.project-info {
+  flex: 1;
+  padding: 10px 14px;
+}
+
+.project-name {
+  font-family: var(--font-display);
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.project-desc {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.project-link {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.project-row:hover .project-link {
+  color: var(--accent);
+}
+</style>
