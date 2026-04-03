@@ -25,7 +25,7 @@ A personal portfolio site at `paulwright.dev` showcasing Paul Wright's profile a
 
 | Layer | Choice |
 |---|---|
-| Framework | Astro 4 (static output) |
+| Framework | Astro 6 (static output) |
 | Styling | Plain CSS — no utility framework |
 | Heading font | Black Han Sans (Google Fonts) |
 | Body/mono font | IBM Plex Mono (Google Fonts) |

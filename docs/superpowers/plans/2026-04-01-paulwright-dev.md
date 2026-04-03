@@ -4,9 +4,9 @@
 
 **Goal:** Build and deploy a brutalist single-page portfolio site at paulwright.dev showcasing profile and projects.
 
-**Architecture:** New standalone Astro 4 static site repo. Single `index.astro` page assembles five focused `.astro` components (Nav, Hero, About, Projects, Footer). All content lives in `src/data/projects.ts`. GitHub Actions deploys `dist/` to Namecheap shared hosting via FTP on every push to `main`.
+**Architecture:** New standalone Astro 6 static site repo. Single `index.astro` page assembles five focused `.astro` components (Nav, Hero, About, Projects, Footer). All content lives in `src/data/projects.ts`. GitHub Actions deploys `dist/` to Namecheap shared hosting via FTP on every push to `main`.
 
-**Tech Stack:** Astro 4, plain CSS with CSS variables, Black Han Sans + IBM Plex Mono (Google Fonts), TypeScript, GitHub Actions + SamKirkland/FTP-Deploy-Action
+**Tech Stack:** Astro 6, plain CSS with CSS variables, Black Han Sans + IBM Plex Mono (Google Fonts), TypeScript, GitHub Actions + SamKirkland/FTP-Deploy-Action
 
 ---
 
