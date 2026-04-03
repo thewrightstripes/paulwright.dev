@@ -1,0 +1,55 @@
+---
+const year = new Date().getFullYear();
+---
+<footer>
+  <span class="copy">© {year} Paul Wright</span>
+  <div class="social">
+    <a
+      href="https://github.com/YOUR_GITHUB_USERNAME"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="github"
+    >GitHub</a>
+    <a
+      href="https://linkedin.com/in/YOUR_LINKEDIN_HANDLE"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="linkedin"
+    >LinkedIn</a>
+  </div>
+</footer>
+
+<style>
+footer {
+  background: var(--fg);
+  color: var(--bg);
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copy {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #555;
+}
+
+.social {
+  display: flex;
+  gap: 20px;
+}
+
+.social a {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.github  { color: var(--accent); }
+.linkedin { color: #888; }
+
+.social a:hover { color: #fff; }
+</style>
