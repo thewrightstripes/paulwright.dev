@@ -5,7 +5,12 @@
     <div class="section-label">§ About</div>
     <p class="bio">
       Senior Engineering Manager at Meta, working at the intersection of delightful user experiences, spatial computing, and user trust and engagement. Member of the Board of Directors, FIDO Alliance.
+      Builder, transformational leader, tech enthusiast.
     </p>
+    <div class="links">
+      <a href="https://engineering.fb.com/2026/02/04/security/cross-device-passkey-authentication-for-xr-devices-meta-quest/" target="_blank" rel="noopener noreferrer" class="ext-link">↗ Cross-Device Passkey Authentication for XR Devices</a>
+      <a href="https://patents.google.com/patent/US11176828B2" target="_blank" rel="noopener noreferrer" class="ext-link">↗ Patent US 11176828 B2</a>
+    </div>
     <a href="mailto:me@paulwright.dev" class="contact-btn">→ Get in touch</a>
   </div>
 </section>
@@ -26,6 +31,25 @@
   color: #111;
   max-width: 560px;
   margin-bottom: 24px;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.ext-link {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-decoration: underline;
+  color: #111;
+}
+
+.ext-link:hover {
+  color: var(--fg);
+  background: var(--accent);
 }
 
 .contact-btn {
