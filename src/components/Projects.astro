@@ -16,6 +16,7 @@ import { projects } from '../data/projects';
           <div class="project-info">
             <div class="project-name">{project.name}</div>
             <div class="project-desc">{project.description}</div>
+            <div class="project-meta">{project.meta}</div>
           </div>
           <div class="project-link">↗</div>
         </a>
@@ -74,9 +75,19 @@ import { projects } from '../data/projects';
 
 .project-desc {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--muted);
-  line-height: 1.5;
+  line-height: 1.6;
+}
+
+.project-meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #111;
+  margin-top: 8px;
 }
 
 .project-link {
