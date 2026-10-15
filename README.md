@@ -1,43 +1,31 @@
-# Astro Starter Kit: Minimal
+# paulwright.dev
+
+Paul Wright's personal site. Single-page static Astro site with a brutalist
+design system (black / white / yellow, Black Han Sans + IBM Plex Mono, no
+radius, no shadows, no gradients).
+
+## Develop
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev      # local dev server
+npm run build    # outputs static site to dist/
+npm run preview  # preview the production build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Content lives in `src/components/` (Hero, About, Projects, Footer) and
+projects are a typed array in `src/data/projects.ts`.
 
-## 🚀 Project Structure
+## Deployment notes (verified 2026-10-15)
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- `www.paulwright.dev` is served from S3 + CloudFront (the AWS Amplify
+  setup). The apex, `paulwright.dev`, does **not** serve the site: HTTPS
+  to the apex returns an empty reply and HTTP returns a Namecheap URL
+  Forward 404. Fix in the Amplify / Route 53 (or Namecheap DNS) console:
+  attach the apex domain to the same distribution as `www`, or redirect
+  the apex to `https://www.paulwright.dev`, and make sure the certificate
+  covers the apex name.
+- Point the host's 404 / error document at `/404.html` (built from
+  `src/pages/404.astro`) so missing paths stop falling back to the
+  homepage.
+- MX records for PrivateEmail (me@paulwright.dev) must stay untouched.
