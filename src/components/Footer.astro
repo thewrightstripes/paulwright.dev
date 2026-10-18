@@ -1,38 +1,79 @@
 ---
 const year = new Date().getFullYear();
 ---
-<footer>
-  <span class="copy">© {year} Paul Wright</span>
-  <div class="social">
-    <a
-      href="https://github.com/thewrightstripes"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="github"
-    >GitHub</a>
-    <a
-      href="https://www.linkedin.com/in/stevenpaulwright/"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="linkedin"
-    >LinkedIn</a>
+<footer id="contact">
+  <div class="wrap inner">
+    <div class="section-head">
+      <h2 class="section-label">04 / Contact</h2>
+      <span class="section-coord">Channel open</span>
+    </div>
+    <a href="mailto:me@paulwright.dev" class="mail">me@paulwright.dev</a>
+    <p class="mail-note">Email is the fastest way to reach me.</p>
+    <div class="foot-row">
+      <span class="copy">© {year} Paul Wright · Seattle, WA</span>
+      <span class="foot-coord" aria-hidden="true">47.6062° N · 122.3321° W · Z +0.00</span>
+      <div class="social">
+        <a href="https://github.com/thewrightstripes" target="_blank" rel="noopener noreferrer" class="github">GitHub</a>
+        <a href="https://www.linkedin.com/in/stevenpaulwright/" target="_blank" rel="noopener noreferrer" class="linkedin">LinkedIn</a>
+      </div>
+    </div>
   </div>
 </footer>
 
 <style>
 footer {
-  background: var(--fg);
-  color: var(--bg);
-  padding: 16px 24px;
+  border-top: 1px solid var(--line);
+  background: var(--bg-deep);
+}
+
+footer .inner {
+  padding-top: 64px;
+  padding-bottom: 34px;
+}
+
+.mail {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(28px, 5.4vw, 52px);
+  letter-spacing: 0.01em;
+  color: var(--fg);
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.mail:hover {
+  color: var(--accent);
+}
+
+.mail-note {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-bottom: 44px;
+}
+
+.foot-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--line-soft);
+  padding-top: 18px;
 }
 
 .copy {
   font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.foot-coord {
+  font-family: var(--font-mono);
   font-size: 10px;
-  color: #aaa;
+  letter-spacing: 1px;
+  color: var(--faint);
 }
 
 .social {
@@ -42,14 +83,14 @@ footer {
 
 .social a {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .github  { color: var(--accent); }
-.linkedin { color: #ddd; }
+.linkedin { color: var(--fg); }
 
-.social a:hover { color: #fff; }
+.social a:hover { color: var(--cool); }
 </style>

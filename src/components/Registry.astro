@@ -1,0 +1,119 @@
+---
+---
+<section id="registry">
+  <div class="wrap inner">
+    <div class="section-head">
+      <h2 class="section-label">02 / Registry</h2>
+      <span class="section-coord">USPTO · granted</span>
+    </div>
+
+    <div class="entry" data-depth="2">
+      <span class="reg reg-tl" aria-hidden="true"></span>
+      <span class="reg reg-br" aria-hidden="true"></span>
+      <div class="entry-top">
+        <span class="entry-index">PAT.001</span>
+        <span class="entry-kind">Patent · Continuation</span>
+      </div>
+      <h3 class="entry-title">Deriving an equivalent real-time ECU speed of a vehicle</h3>
+      <p class="entry-body">
+        Granted as
+        <a href="https://patents.google.com/patent/US11176828B2" target="_blank" rel="noopener noreferrer">US 11,176,828</a>,
+        continued as
+        <a href="https://patents.google.com/patent/US11887482B2" target="_blank" rel="noopener noreferrer">US 11,887,482</a>.
+        One invention, two grants — fleet telematics: deriving engine speed from GPS data.
+      </p>
+      <div class="entry-fields" aria-label="Patent record fields">
+        <span><i>Doc</i> US11176828B2 / US11887482B2</span>
+        <span><i>Assignee</i> Verizon Connect</span>
+        <span><i>Inventors</i> Wright · Morris · Casey</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+#registry .inner {
+  padding-top: 8px;
+  padding-bottom: 80px;
+}
+
+.entry {
+  position: relative;
+  background: var(--bg-raise);
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--accent);
+  padding: 22px 22px 18px;
+  max-width: 860px;
+  will-change: transform;
+}
+
+.reg-tl { top: -6px; left: -6px; }
+.reg-br { bottom: -6px; right: -6px; }
+
+.entry-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.entry-index {
+  color: var(--cool);
+  font-weight: 700;
+}
+
+.entry-kind {
+  color: var(--muted);
+}
+
+.entry-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(21px, 3vw, 28px);
+  line-height: 1.25;
+  color: var(--fg);
+  margin-bottom: 10px;
+}
+
+.entry-body {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 640px;
+  margin-bottom: 18px;
+}
+
+.entry-body a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.entry-body a:hover {
+  color: var(--fg);
+}
+
+.entry-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  border-top: 1px solid var(--line-soft);
+  padding-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.entry-fields i {
+  font-style: normal;
+  color: var(--faint);
+  margin-right: 7px;
+}
+</style>

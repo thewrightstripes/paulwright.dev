@@ -1,40 +1,69 @@
 ---
 ---
-<nav>
-  <a href="#top" class="monogram">PW</a>
-  <div class="links">
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="mailto:me@paulwright.dev" class="contact">Contact</a>
+<header class="topbar">
+  <nav aria-label="Primary">
+    <a href="#top" class="monogram"><span class="mono-mark">PW</span><span class="mono-name">Paul Wright</span></a>
+    <div class="links">
+      <a href="#projects">Projects</a>
+      <a href="#registry">Registry</a>
+      <a href="#about">About</a>
+      <a href="mailto:me@paulwright.dev" class="contact">Contact</a>
+    </div>
+  </nav>
+  <div class="status" role="status">
+    <span class="status-dot" aria-hidden="true"></span>
+    <span class="status-text">Now — Leading XR input team · Meta&nbsp;&nbsp;/&nbsp;&nbsp;Building Marginota</span>
+    <span class="status-coord" aria-hidden="true">47.6062° N · 122.3321° W</span>
   </div>
-</nav>
+</header>
 
 <style>
-nav {
+.topbar {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: #000;
-  color: #fff;
+  background: rgba(5, 8, 13, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 24px;
-  border-bottom: var(--border);
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 12px 24px;
 }
 
 .monogram {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mono-mark {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 2px;
+  color: #000;
+  background: var(--accent);
+  padding: 2px 7px;
+}
+
+.mono-name {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--fg);
 }
 
 .links {
   display: flex;
-  gap: 20px;
+  gap: 22px;
 }
 
 .links a {
@@ -43,16 +72,67 @@ nav {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #fff;
-  padding: 2px 4px;
+  color: var(--muted);
+  padding: 2px 2px;
+}
+
+.links a:hover {
+  color: var(--accent);
 }
 
 .links a.contact {
   color: var(--accent);
 }
 
-.links a:hover {
+.status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 6px 24px 8px;
+  border-top: 1px solid var(--line-soft);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
   background: var(--accent);
-  color: #000;
+  border-radius: 50%;
+  animation: pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.status-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.status-coord {
+  margin-left: auto;
+  color: var(--faint);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .status-coord { display: none; }
+  .mono-name { display: none; }
+  .links { gap: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-dot { animation: none; }
 }
 </style>

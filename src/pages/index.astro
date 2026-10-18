@@ -3,6 +3,7 @@ import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import Projects from '../components/Projects.astro';
+import Registry from '../components/Registry.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
@@ -54,9 +55,54 @@ const person = {
     <Nav />
     <main>
       <Hero />
-      <About />
       <Projects />
+      <Registry />
+      <About />
     </main>
     <Footer />
+
+    <script>
+      // Gentle depth parallax: elements tagged data-depth="n" drift a few
+      // px against the pointer and scroll, each at its own rate.
+      // Fully disabled under prefers-reduced-motion.
+      (() => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const els = Array.from(document.querySelectorAll('[data-depth]'));
+        if (!els.length) return;
+        let mx = 0, my = 0, raf = 0;
+        const state = new Map(els.map((el) => [el, { x: 0, y: 0 }]));
+
+        window.addEventListener('pointermove', (e) => {
+          mx = e.clientX / window.innerWidth - 0.5;
+          my = e.clientY / window.innerHeight - 0.5;
+          kick();
+        }, { passive: true });
+        window.addEventListener('scroll', kick, { passive: true });
+
+        function kick() {
+          if (!raf) raf = requestAnimationFrame(tick);
+        }
+        function tick() {
+          raf = 0;
+          let settled = true;
+          for (const el of els) {
+            const d = parseFloat(el.dataset.depth || '0');
+            const r = el.getBoundingClientRect();
+            const offScreen = r.bottom < -80 || r.top > window.innerHeight + 80;
+            // scroll depth: element center vs viewport center, tiny factor
+            const sc = ((r.top + r.height / 2) - window.innerHeight / 2) / window.innerHeight;
+            const tx = offScreen ? 0 : mx * d * -2.2;
+            const ty = offScreen ? 0 : my * d * -1.4 + sc * d * -3.2;
+            const s = state.get(el);
+            s.x += (tx - s.x) * 0.08;
+            s.y += (ty - s.y) * 0.08;
+            if (Math.abs(tx - s.x) > 0.05 || Math.abs(ty - s.y) > 0.05) settled = false;
+            el.style.transform = `translate3d(${s.x.toFixed(2)}px, ${s.y.toFixed(2)}px, 0)`;
+          }
+          if (!settled) raf = requestAnimationFrame(tick);
+        }
+        kick();
+      })();
+    </script>
   </body>
 </html>
