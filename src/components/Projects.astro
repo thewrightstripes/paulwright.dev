@@ -2,23 +2,33 @@
 import { projects } from '../data/projects';
 ---
 <section id="projects">
-  <div class="inner">
-    <div class="section-label">§ Projects</div>
-    <div class="project-list">
+  <div class="wrap inner">
+    <div class="section-head">
+      <h2 class="section-label">01 / Projects</h2>
+      <span class="section-coord">2 objects · tracked</span>
+    </div>
+    <div class="project-grid">
       {projects.map((project, i) => (
         <a
           href={project.url}
           target="_blank"
           rel="noopener noreferrer"
-          class="project-row"
+          class={`project-panel ${i === 1 ? 'offset' : ''}`}
+          data-depth={i === 0 ? '2.5' : '5'}
         >
-          <div class={`accent-bar ${i % 2 === 0 ? 'yellow' : 'black'}`}></div>
-          <div class="project-info">
-            <div class="project-name">{project.name}</div>
-            <div class="project-desc">{project.description}</div>
-            <div class="project-meta">{project.meta}</div>
+          <span class="reg reg-tl" aria-hidden="true"></span>
+          <span class="reg reg-br" aria-hidden="true"></span>
+          <div class="panel-top">
+            <span class="panel-index">P.0{i + 1}</span>
+            <span class="status-chip"><span class="status-led" aria-hidden="true"></span>{project.status}</span>
+            <span class="panel-depth" aria-hidden="true">{project.depth}</span>
           </div>
-          <div class="project-link">↗</div>
+          <h3 class="project-name">{project.name}</h3>
+          <p class="project-desc">{project.description}</p>
+          <div class="panel-bottom">
+            <span class="tags">{project.tags.map((t) => <span class="tag">{t}</span>)}</span>
+            <span class="go" aria-hidden="true">Visit ↗</span>
+          </div>
         </a>
       ))}
     </div>
@@ -26,82 +36,136 @@ import { projects } from '../data/projects';
 </section>
 
 <style>
-#projects {
-  background: var(--bg);
+#projects .inner {
+  padding-top: 72px;
+  padding-bottom: 80px;
 }
 
-.inner {
-  padding: 40px 24px;
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
 }
 
-.project-list {
+/* The second plane sits lower — depth offset, not decoration */
+.project-panel.offset {
+  margin-top: 36px;
+}
+
+.project-panel {
+  position: relative;
+  display: block;
+  background: var(--bg-raise);
+  border: 1px solid var(--line);
+  padding: 22px 22px 18px;
+  will-change: transform;
+}
+
+.project-panel:hover,
+.project-panel:focus-visible {
+  border-color: var(--accent-dim);
+}
+
+.reg-tl { top: -6px; left: -6px; }
+.reg-br { bottom: -6px; right: -6px; }
+
+.panel-top {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 720px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.project-row {
-  display: flex;
-  align-items: stretch;
-  border: var(--border-thin);
-  color: inherit;
+.panel-index {
+  color: var(--cool);
+  font-weight: 700;
 }
 
-.project-row:hover {
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--accent-dim);
+  color: var(--accent);
+  padding: 1px 8px;
+  font-weight: 700;
+}
+
+.status-led {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
   background: var(--accent);
 }
 
-.accent-bar {
-  width: 8px;
-  flex-shrink: 0;
-}
-
-.accent-bar.yellow { background: var(--accent); }
-.accent-bar.black  { background: var(--fg); }
-
-.project-info {
-  flex: 1;
-  padding: 10px 14px;
+.panel-depth {
+  margin-left: auto;
+  color: var(--faint);
 }
 
 .project-name {
   font-family: var(--font-display);
-  font-size: 15px;
+  font-weight: 700;
+  font-size: 34px;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 4px;
+  color: var(--fg);
+  margin-bottom: 10px;
+  line-height: 1.1;
 }
 
 .project-desc {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   color: var(--muted);
-  line-height: 1.6;
+  line-height: 1.7;
+  margin-bottom: 22px;
 }
 
-.project-meta {
+.panel-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
   font-family: var(--font-mono);
   font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: 1px;
-  color: #111;
-  margin-top: 8px;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  padding: 1px 7px;
 }
 
-.project-link {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  padding: 0 14px;
-  background: var(--fg);
-  color: var(--bg);
-  font-size: 14px;
+.go {
+  font-family: var(--font-mono);
+  font-size: 11px;
   font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
 }
 
-.project-row:hover .project-link {
-  color: var(--accent);
+@media (max-width: 760px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+  .project-panel.offset {
+    margin-top: 0;
+  }
 }
 </style>

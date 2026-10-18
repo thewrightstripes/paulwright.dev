@@ -1,16 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap');
 
 :root {
-  --bg:          #ffffff;
-  --fg:          #000000;
-  --accent:      #ffff00;
-  --muted:       #555555;
-  --section-alt: #f5f5f5;
+  /* Spatial palette — dark field, command gold, one cool accent */
+  --bg:        #05080d;  /* blue-black field */
+  --bg-raise:  #0a1017;  /* panel plane */
+  --bg-deep:   #03050a;
+  --fg:        #e9eff5;  /* primary text */
+  --muted:     #9db0c1;  /* secondary text — ~7.5:1 on --bg */
+  --faint:     #63788c;  /* tertiary labels, mono only */
+  --accent:    #ffd028;  /* command gold */
+  --accent-dim:#8a6d14;  /* gold at border weight */
+  --cool:      #6ee7ff;  /* depth/grid highlight — sparing */
+  --line:      #1c2a3a;  /* 1px panel borders */
+  --line-soft: #111b27;
+  --grid-line: rgba(110, 231, 255, 0.055);       /* blueprint grid */
+  --grid-line-major: rgba(110, 231, 255, 0.09);
 
-  --border:      3px solid #000000;
-  --border-thin: 2px solid #000000;
-
-  --font-display: 'Black Han Sans', Impact, sans-serif;
+  --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
   --font-mono:    'IBM Plex Mono', 'Courier New', monospace;
 }
 
@@ -20,13 +26,44 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Blueprint grid field — a fixed measurement plane behind the page.
+   The "gradients" here draw 1px rules: line art, not decoration. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right,  var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to right,  var(--grid-line-major) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line-major) 1px, transparent 1px);
+  background-size:
+    28px 28px,
+    28px 28px,
+    140px 140px,
+    140px 140px;
+  -webkit-mask-image: radial-gradient(ellipse 130% 100% at 50% 0%, #000 55%, rgba(0, 0, 0, 0.5) 100%);
+          mask-image: radial-gradient(ellipse 130% 100% at 50% 0%, #000 55%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+nav, main, footer {
+  position: relative;
+  z-index: 1;
 }
 
 a {
@@ -35,27 +72,62 @@ a {
 }
 
 section {
-  border-bottom: var(--border);
+  position: relative;
+}
+
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
 }
 
 .section-label {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 3px;
-  color: #595959;
-  margin-bottom: 16px;
+  color: var(--accent);
 }
+
+.section-coord {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--faint);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Registration mark — crosshair pinned to panel corners */
+.reg {
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  pointer-events: none;
+  color: var(--faint);
+}
+.reg::before,
+.reg::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+}
+.reg::before { left: 5px; top: 0; width: 1px; height: 11px; }
+.reg::after  { left: 0; top: 5px; width: 11px; height: 1px; }
 
 :focus-visible {
-  outline: 3px solid var(--fg);
-  outline-offset: 2px;
-}
-
-nav :focus-visible,
-footer :focus-visible {
-  outline-color: var(--accent);
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .skip-link {
@@ -63,7 +135,7 @@ footer :focus-visible {
   left: -9999px;
   top: 0;
   background: var(--accent);
-  color: var(--fg);
+  color: #000;
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 700;
@@ -75,4 +147,15 @@ footer :focus-visible {
 
 .skip-link:focus-visible {
   left: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
